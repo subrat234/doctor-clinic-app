@@ -83,22 +83,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="about" class="nav-item nav-link">About</a>
+                <a href="service" class="nav-item nav-link">Service</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">
-                        <a href="price.html" class="dropdown-item active">Pricing Plan</a>
-                        <a href="team.html" class="dropdown-item">Our Dentist</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="appointment.html" class="dropdown-item">Appointment</a>
+                        <a href="price" class="dropdown-item active">Pricing Plan</a>
+                        <a href="team" class="dropdown-item">Our Dentist</a>
+                        <a href="testimonial" class="dropdown-item">Testimonial</a>
+                        <a href="appointments" class="dropdown-item">Appointment</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="contact" class="nav-item nav-link">Contact</a>
             </div>
             <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+            <a href="appointments" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
         </div>
     </nav>
     <!-- Navbar End -->

@@ -29,7 +29,7 @@ public class AppointmentController {
     {
         return "hello";
     }
-
+    
     @PostMapping("/book")
     public String bookAppointment(
             @RequestParam String patientName,
@@ -60,5 +60,36 @@ public class AppointmentController {
         model.addAttribute("appointments", service.getAll());
         return "appointments"; // resolves to /WEB-INF/views/appointments.jsp
     }
+    
+    @GetMapping("/contact")
+    public String showContactPage() {
+        return "contact"; // maps to contact.jsp
+    }
+    
+    @GetMapping("/about")
+    public String showAboutPage() {
+        return "about"; // maps to about.jsp
+    }
+    @GetMapping("/service")
+    public String showService() {
+        return "service";
+    }
+    @GetMapping("/testimonial")
+    public String showTestimonial() {
+        return "testimonial"; // maps to testimonials.jsp
+    }
+    
+    @GetMapping("/team")
+    public String showTeamPage() {
+        return "team"; // maps to team.jsp
+    }
+    
+    @GetMapping("/price")
+    public String showPricingPage() {
+        return "price"; // maps to pricing.jsp
+    }
+
+
+
 
 }
