@@ -7,6 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 public class DoctorClinicApplication extends SpringBootServletInitializer {
+
     public static void main(String[] args) {
         SpringApplication.run(DoctorClinicApplication.class, args);
     }
