@@ -1,23 +1,45 @@
 package com.subrat.clinic.controller;
 
 import com.subrat.clinic.model.Doctor;
+import com.subrat.clinic.service.DoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class DoctorController {
 
+    @Autowired
+    private DoctorService service;
+
     @GetMapping("/doctors")
-    public String showDoctors(Model model) {
-        List<Doctor> sampleDoctors = List.of(
-            new Doctor("Dr. Arya Mehta", "Orthodontist", "https://cdn.pixabay.com/photo/2017/08/06/00/15/people-2587313_1280.jpg", "Specializes in braces and smile alignment."),
-            new Doctor("Dr. Rahul Das", "Periodontist", "https://i.imgur.com/def456.jpg", "Expert in gum care and dental implants."),
-            new Doctor("Dr. Anita Rao", "Pediatric Dentist", "https://images.unsplash.com/photo-1588776814546-ec7e5f1b4f6e", "Loves caring for kids' dental health.")
-        );
-        model.addAttribute("doctors", sampleDoctors);
-        return "doctors"; // maps to doctors.jsp
+    public String viewDoctors(Model model) {
+        model.addAttribute("doctors", service.getAll());
+        return "doctors";
+    }
+
+    @GetMapping("/doctors/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("doctor", new Doctor());
+        return "add_doctor";
+    }
+
+    @PostMapping("/doctors/save")
+    public String saveDoctor(@ModelAttribute Doctor doctor) {
+        service.save(doctor);
+        return "redirect:/doctors";
+    }
+
+    @GetMapping("/doctors/edit/{id}")
+    public String editDoctor(@PathVariable Long id, Model model) {
+        model.addAttribute("doctor", service.getById(id));
+        return "add_doctor";
+    }
+
+    @GetMapping("/doctors/delete/{id}")
+    public String deleteDoctor(@PathVariable Long id) {
+        service.deleteById(id);
+        return "redirect:/doctors";
     }
 }

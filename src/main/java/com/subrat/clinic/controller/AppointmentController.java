@@ -17,21 +17,27 @@ public class AppointmentController {
     @Autowired
     private AppointmentService service;
 
+    // Home page
     @GetMapping("/")
     public String showHomePage(Model model) {
         model.addAttribute("appointment", new Appointment());
         return "index";
- 
     }
-    //Tested Pupose 
+
+    // Test JSP
     @GetMapping("/hello")
-    public String testJsp() 
-    {
+    public String testJsp() {
         return "hello";
     }
-    
-    
-  
+
+    // Show the standalone booking form (book_appointment.jsp)
+    @GetMapping("/book_appointment")
+    public String showBookAppointmentForm(Model model) {
+        model.addAttribute("appointment", new Appointment());
+        return "book_appointment";  // resolves to /WEB-INF/views/book_appointment.jsp
+    }
+
+    // Handle the form submission
     @PostMapping("/book")
     public String bookAppointment(
             @RequestParam String patientName,
@@ -52,46 +58,49 @@ public class AppointmentController {
         appointment.setAppointmentTime(appointmentTime);
 
         service.save(appointment);
-        return "redirect:/appointments?success=true";
-    }
-    
-    @GetMapping("/appointments")
-    public String viewAppointments(Model model, @RequestParam(required = false) String success) {
-        model.addAttribute("appointments", service.getAll());
-        model.addAttribute("success", success != null);
-        return "appointments";
+        // Redirect back to the booking page with success flag
+        return "redirect:/book_appointment?success=true";
     }
 
-    
+    // View all appointments (appointments.jsp)
+    @GetMapping("/appointments")
+    public String viewAppointments(
+            Model model,
+            @RequestParam(required = false) String success
+    ) {
+        model.addAttribute("appointments", service.getAll());
+        model.addAttribute("success", success != null);
+        return "appointments";  // resolves to /WEB-INF/views/appointments.jsp
+    }
+
+    // Static pages
     @GetMapping("/contact")
     public String showContactPage() {
-        return "contact"; // maps to contact.jsp
+        return "contact";
     }
-    
+
     @GetMapping("/about")
     public String showAboutPage() {
-        return "about"; // maps to about.jsp
+        return "about";
     }
+
     @GetMapping("/service")
     public String showService() {
         return "service";
     }
+
     @GetMapping("/testimonial")
     public String showTestimonial() {
-        return "testimonial"; // maps to testimonials.jsp
+        return "testimonial";
     }
-    
+
     @GetMapping("/team")
     public String showTeamPage() {
-        return "team"; // maps to team.jsp
+        return "team";
     }
-    
+
     @GetMapping("/price")
     public String showPricingPage() {
-        return "price"; // maps to pricing.jsp
+        return "price";
     }
-
-
-
-
 }
