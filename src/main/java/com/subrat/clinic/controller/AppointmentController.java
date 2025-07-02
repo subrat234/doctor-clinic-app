@@ -2,12 +2,21 @@ package com.subrat.clinic.controller;
 
 import com.subrat.clinic.model.Appointment;
 import com.subrat.clinic.service.AppointmentService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -78,6 +87,19 @@ public class AppointmentController {
     public String showContactPage() {
         return "contact";
     }
+    
+    @WebServlet("/logout")
+    public class LogoutServlet extends HttpServlet {
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+            HttpSession session = request.getSession(false); // fetch session if exists
+            if (session != null) {
+                session.invalidate();
+            }
+            response.sendRedirect("login.jsp"); // redirect to login
+        }
+    }
+
 
     @GetMapping("/about")
     public String showAboutPage() {

@@ -1,3 +1,4 @@
+
 package com.subrat.clinic.controller;
 
 import com.subrat.clinic.model.Patient;
@@ -57,5 +58,9 @@ public class AuthenticationController {
         }
         // On success, you can store user in session if needed
         return "redirect:/";
+        
+
+        
+        
     }
 }

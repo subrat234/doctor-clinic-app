@@ -100,7 +100,19 @@
                 <a href="contact" class="nav-item nav-link">Contact</a>
             </div>
             <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-            <a href="appointments" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+             <c:choose>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i> ${sessionScope.user.name}
+                        </a>
+                        <div class="dropdown-menu fade-up m-0">
+                            <a href="profile.jsp" class="dropdown-item">Profile</a>
+                            <a href="change_password.jsp" class="dropdown-item">Change Password</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="logout" class="dropdown-item text-danger">Logout</a>
+                        </div>
+                    </div>
+            </c:choose>
         </div>
     </nav>
     <!-- Navbar End -->
