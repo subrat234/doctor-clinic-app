@@ -137,8 +137,8 @@
     <!-- Hero End -->
 
 
-    <!-- Appointment Start -->
-    <div class="container-fluid bg-primary bg-appointment mb-5 wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 90px;">
+     <!-- Appointment Start -->
+    <div class="container-fluid bg-primary bg-appointment my-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-6 py-5">
@@ -150,7 +150,7 @@
                 <div class="col-lg-6">
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Make Appointment</h1>
-                        <form>
+                      
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
                                     <select class="form-select bg-light border-0" style="height: 55px;">
@@ -199,7 +199,6 @@
         </div>
     </div>
     <!-- Appointment End -->
-    
 
     <!-- Newsletter Start -->
     <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">

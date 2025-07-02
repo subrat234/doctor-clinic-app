@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DentCare - Dental Clinic Website Template</title>
+    <title>DentCare - Dental Clinic Website</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -50,7 +50,7 @@
     </div>
     <!-- Spinner End -->
 
-
+ 
     <!-- Topbar Start -->
     <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
         <div class="row gx-0">
@@ -84,7 +84,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link">Home</a>
+               <a href="/" class="nav-item nav-link">Home</a> 
                 <a href="about" class="nav-item nav-link active">About</a>
                 <a href="service" class="nav-item nav-link">Service</a>
                 <div class="nav-item dropdown">

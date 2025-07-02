@@ -10,7 +10,7 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+ 
     private String patientName;
     private String email;
     private String phone;

@@ -30,6 +30,8 @@ public class AppointmentController {
         return "hello";
     }
     
+    
+  
     @PostMapping("/book")
     public String bookAppointment(
             @RequestParam String patientName,
@@ -50,16 +52,16 @@ public class AppointmentController {
         appointment.setAppointmentTime(appointmentTime);
 
         service.save(appointment);
+        return "redirect:/appointments?success=true";
+    }
+    
+    @GetMapping("/appointments")
+    public String viewAppointments(Model model, @RequestParam(required = false) String success) {
+        model.addAttribute("appointments", service.getAll());
+        model.addAttribute("success", success != null);
         return "appointments";
     }
 
-
-
-    @GetMapping("/appointments")
-    public String viewAppointments(Model model) {
-        model.addAttribute("appointments", service.getAll());
-        return "appointments"; // resolves to /WEB-INF/views/appointments.jsp
-    }
     
     @GetMapping("/contact")
     public String showContactPage() {
