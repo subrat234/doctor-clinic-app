@@ -1,35 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div class="container py-5">
-    <h2 class="text-center">Change Password</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-6 bg-white p-4 rounded shadow">
-            <form action="change-password" method="post">
-                <div class="mb-3">
-                    <label class="form-label">Current Password</label>
-                    <input type="password" name="currentPassword" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">New Password</label>
-                    <input type="password" name="newPassword" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Confirm New Password</label>
-                    <input type="password" name="confirmPassword" class="form-control" required />
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Change Password</button>
-            </form>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Change Password</h2>
+    
+    <c:if test="${not empty error}">
+        <div class="alert alert-danger">${error}</div>
+    </c:if>
+    <c:if test="${not empty success}">
+        <div class="alert alert-success">${success}</div>
+    </c:if>
+
+    <form method="post" action="change-password">
+        <div class="mb-3">
+            <label>Old Password</label>
+            <input type="password" class="form-control" name="oldPassword" required />
         </div>
-    </div>
+        <div class="mb-3">
+            <label>New Password</label>
+            <input type="password" class="form-control" name="newPassword" required />
+        </div>
+        <div class="mb-3">
+            <label>Confirm New Password</label>
+            <input type="password" class="form-control" name="confirmPassword" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+    </form>
 </div>
 
-
-</body>
-</html>
