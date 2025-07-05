@@ -7,39 +7,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
+@RequestMapping("/admin/doctors")
 public class DoctorController {
 
     @Autowired
-    private DoctorService service;
+    private DoctorService doctorService;
 
-    @GetMapping("/doctors")
-    public String viewDoctors(Model model) {
-        model.addAttribute("doctors", service.getAll());
-        return "doctors";
+    @GetMapping
+    public String listDoctors(Model model) {
+        List<Doctor> doctors = doctorService.findAll();
+        model.addAttribute("doctors", doctors);
+        return "doctor_list"; // doctor_list.jsp
     }
 
-    @GetMapping("/doctors/add")
+    @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("doctor", new Doctor());
-        return "add_doctor";
+        return "doctor_form"; // doctor_form.jsp
     }
 
-    @PostMapping("/doctors/save")
+    @PostMapping("/save")
     public String saveDoctor(@ModelAttribute Doctor doctor) {
-        service.save(doctor);
-        return "redirect:/doctors";
+        doctorService.save(doctor);
+        return "redirect:/admin/doctors";
     }
 
-    @GetMapping("/doctors/edit/{id}")
-    public String editDoctor(@PathVariable Long id, Model model) {
-        model.addAttribute("doctor", service.getById(id));
-        return "add_doctor";
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Doctor doctor = doctorService.findById(id);
+        model.addAttribute("doctor", doctor);
+        return "doctor_form";
     }
 
-    @GetMapping("/doctors/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteDoctor(@PathVariable Long id) {
-        service.deleteById(id);
-        return "redirect:/doctors";
+        doctorService.deleteById(id);
+        return "redirect:/admin/doctors";
     }
 }

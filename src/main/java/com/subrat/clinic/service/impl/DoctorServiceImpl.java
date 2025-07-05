@@ -7,30 +7,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
-    private DoctorRepository repository;
+    private DoctorRepository doctorRepository;
 
     @Override
     public Doctor save(Doctor doctor) {
-        return repository.save(doctor);
+        return doctorRepository.save(doctor);
     }
 
     @Override
-    public List<Doctor> getAll() {
-        return repository.findAll();
-    }
-
-    @Override
-    public Doctor getById(Long id) {
-        return repository.findById(id).orElse(null);
+    public Doctor update(Doctor doctor) {
+        return doctorRepository.save(doctor);
     }
 
     @Override
     public void deleteById(Long id) {
-        repository.deleteById(id);
+        doctorRepository.deleteById(id);
+    }
+
+    @Override
+    public Doctor findById(Long id) {
+        return doctorRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Doctor> findAll() {
+        return doctorRepository.findAll();
+    }
+
+    @Override
+    public Doctor findByEmail(String email) {
+        return doctorRepository.findByEmail(email);
     }
 }

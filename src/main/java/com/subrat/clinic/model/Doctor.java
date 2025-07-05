@@ -13,8 +13,20 @@ public class Doctor {
     private String specialization;
     private String email;
     private String phone;
+    private String password;
 
-    // Getters and Setters
+    // Constructors
+    public Doctor() {}
+
+    public Doctor(String name, String specialization, String email, String phone, String password) {
+        this.name = name;
+        this.specialization = specialization;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
+
+    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -29,4 +41,7 @@ public class Doctor {
 
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }

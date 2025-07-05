@@ -1,7 +1,12 @@
 package com.subrat.clinic.controller;
 
 import com.subrat.clinic.model.Patient;
+import com.subrat.clinic.model.Doctor;
 import com.subrat.clinic.service.PatientService;
+import com.subrat.clinic.service.DoctorService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +18,17 @@ public class AuthenticationController {
     @Autowired
     private PatientService patientService;
 
-    // Show the registration form
+    @Autowired
+    private DoctorService doctorService;
+
+    // Show the registration form for user
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("patient", new Patient());
         return "register";
     }
 
-    // Process registration
+    // Process user registration
     @PostMapping("/register")
     public String registerUser(
             @ModelAttribute Patient patient,
@@ -31,32 +39,51 @@ public class AuthenticationController {
             model.addAttribute("error", "Passwords do not match.");
             return "register";
         }
-        // Save the patient (you may want to hash the password)
         patientService.save(patient);
         return "redirect:/login";
     }
 
-    // Show the login form
+    // Show shared login form
     @GetMapping("/login")
     public String showLoginForm() {
         return "login";
     }
 
-    // Process login
+    // ✅ UPDATED: Unified login logic for both user and doctor
     @PostMapping("/login")
-    public String loginUser(
+    public String loginUserOrDoctor(
             @RequestParam String email,
             @RequestParam String password,
+            @RequestParam String role,
+            HttpSession session,
             Model model
     ) {
-        // Lookup patient by email (you need a findByEmail in PatientRepository)
-        Patient existing = patientService.findByEmail(email);
-        if (existing == null || !existing.getPassword().equals(password)) {
-            model.addAttribute("error", "Invalid email or password.");
-            return "login";
+        if ("user".equals(role)) {
+            Patient existing = patientService.findByEmail(email);
+            if (existing == null || !existing.getPassword().equals(password)) {
+                model.addAttribute("error", "Invalid email or password.");
+                return "login";
+            }
+            session.setAttribute("user", existing);
+            return "redirect:/user/dashboard";
+        } else if ("admin".equals(role)) {
+            Doctor existing = doctorService.findByEmail(email);
+            if (existing == null || !existing.getPassword().equals(password)) {
+                model.addAttribute("error", "Invalid email or password.");
+                return "login";
+            }
+            session.setAttribute("doctor", existing);
+            return "redirect:/doctor/dashboard";
         }
-        // On success, you can store user in session if needed
-        return "redirect:/";
-       
+
+        model.addAttribute("error", "Invalid role selected.");
+        return "login";
+    }
+
+    // Optional: Logout
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
     }
 }
